@@ -1,62 +1,129 @@
 import { Link } from 'react-router-dom';
-import { Home, Bell, User } from 'lucide-react';
+import { Youtube, Instagram, MessageCircle } from 'lucide-react';
 
 export const Footer = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <>
-      {/* Desktop Footer */}
-      <footer className="hidden md:block bg-white border-t">
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Hubungi Kami</h3>
-              <p>Email: info@oktani.com</p>
-              <p>Tel: +62 812 3456 7890</p>
-              <p>Jl. Raya No. 123, Indonesia</p>
+    <footer className="bg-[#2B5329] text-white py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Hubungi Kami Section */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Hubungi Kami</h3>
+            <div className="space-y-2">
+              <p className="flex items-center">
+                <span className="mr-2">✉️</span>
+                oktani@gmail.com
+              </p>
+              <p className="flex items-center">
+                <span className="mr-2">📞</span>
+                +62 812-3456-7890
+              </p>
+              <p className="flex items-center">
+                <span className="mr-2">📍</span>
+                Jl. Nusaputra No. 123
+              </p>
+              <p className="ml-6">Sukabumi, Indonesia</p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Kategori</h3>
-              <ul className="space-y-2">
-                <li><Link to="/pertanian" className="hover:text-primary">Pertanian Modern</Link></li>
-                <li><Link to="/tips" className="hover:text-primary">Tips & Trik</Link></li>
-                <li><Link to="/teknologi" className="hover:text-primary">Teknologi Pertanian</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Tautan</h3>
-              <ul className="space-y-2">
-                <li><Link to="/about" className="hover:text-primary">Tentang Kami</Link></li>
-                <li><Link to="/faq" className="hover:text-primary">FAQ</Link></li>
-                <li><Link to="/contact" className="hover:text-primary">Kontak</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Ikuti Kami</h3>
-              <div className="flex space-x-4">
-                {/* Add social media icons here */}
-              </div>
+            <div className="flex space-x-4 mt-4">
+              <a href="#" className="text-white hover:text-gray-300">
+                <Youtube size={24} />
+              </a>
+              <a href="#" className="text-white hover:text-gray-300">
+                <Instagram size={24} />
+              </a>
+              <a href="#" className="text-white hover:text-gray-300">
+                <MessageCircle size={24} />
+              </a>
             </div>
           </div>
-        </div>
-      </footer>
 
-      {/* Mobile Navigation Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t">
-        <div className="grid grid-cols-3 gap-4 p-4">
-          <Link to="/" className="flex flex-col items-center text-gray-600 hover:text-primary">
-            <Home size={24} />
-            <span className="text-xs">Beranda</span>
-          </Link>
-          <Link to="/notifications" className="flex flex-col items-center text-gray-600 hover:text-primary">
-            <Bell size={24} />
-            <span className="text-xs">Notifikasi</span>
-          </Link>
-          <Link to="/profile" className="flex flex-col items-center text-gray-600 hover:text-primary">
-            <User size={24} />
-            <span className="text-xs">Profil</span>
-          </Link>
+          {/* Kategori Section */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Kategori</h3>
+            <ul className="space-y-2">
+              <li>
+                <button className="hover:text-gray-300">
+                  Pertanian Modern
+                </button>
+              </li>
+              <li>
+                <button className="hover:text-gray-300">
+                  Tips & Trik
+                </button>
+              </li>
+              <li>
+                <button className="hover:text-gray-300">
+                  Teknologi Pertanian
+                </button>
+              </li>
+              <li>
+                <button className="hover:text-gray-300">
+                  Agribisnis
+                </button>
+              </li>
+              <li>
+                <button className="hover:text-gray-300">
+                  Komunitas
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Tautan Section */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Tautan</h3>
+            <ul className="space-y-2">
+              <li>
+                <button 
+                  onClick={() => scrollToSection('home')}
+                  className="hover:text-gray-300"
+                >
+                  Beranda
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className="hover:text-gray-300"
+                >
+                  Tentang Kami
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('info')}
+                  className="hover:text-gray-300"
+                >
+                  Informasi/Media
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('features')}
+                  className="hover:text-gray-300"
+                >
+                  Fitur
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="hover:text-gray-300"
+                >
+                  Kontak
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-      </nav>
-    </>
+      </div>
+    </footer>
   );
 };

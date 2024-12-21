@@ -25,10 +25,13 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center bg-cover bg-center relative" 
+      <section 
+        id="home"
+        className="min-h-screen flex items-center justify-center bg-cover bg-center relative" 
         style={{
-          backgroundImage: `url('/lovable-uploads/9ce05764-ea31-4780-a07d-1ee51493293d.png')`
-        }}>
+          backgroundImage: `url('/lovable-uploads/818ba950-fb11-4f6f-8191-ce1a36381263.png')`
+        }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="container mx-auto px-4 relative text-white text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { Mail, Lock, User, Phone } from 'lucide-react';
 
 const Register = () => {
@@ -15,9 +15,28 @@ const Register = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  const validatePassword = (password: string) => {
+    if (password.length < 6) {
+      return "Password harus minimal 6 karakter";
+    }
+    return null;
+  };
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // Validate password before submission
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      toast({
+        variant: "destructive",
+        title: "Validasi gagal",
+        description: passwordError,
+      });
+      setLoading(false);
+      return;
+    }
 
     try {
       const { data: { user }, error: signUpError } = await supabase.auth.signUp({
@@ -121,6 +140,7 @@ const Register = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
               />
             </div>
           </div>

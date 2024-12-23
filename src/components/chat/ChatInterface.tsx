@@ -16,7 +16,6 @@ export const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -25,7 +24,6 @@ export const ChatInterface = () => {
   };
 
   useEffect(() => {
-    getCurrentUser();
     loadChatHistory();
   }, []);
 
@@ -33,29 +31,10 @@ export const ChatInterface = () => {
     scrollToBottom();
   }, [messages]);
 
-  const getCurrentUser = async () => {
-    const { data: { session }, error } = await supabase.auth.getSession();
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to get current user",
-      });
-      return;
-    }
-    if (session?.user) {
-      setUserId(session.user.id);
-    }
-  };
-
   const loadChatHistory = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) return;
-
     const { data, error } = await supabase
       .from('chat_history')
       .select('*')
-      .eq('user_id', session.user.id)
       .order('created_at', { ascending: true });
 
     if (error) {
@@ -72,7 +51,7 @@ export const ChatInterface = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim() || isLoading || !userId) return;
+    if (!newMessage.trim() || isLoading) return;
 
     setIsLoading(true);
     const userMessage = newMessage;
@@ -82,11 +61,7 @@ export const ChatInterface = () => {
     const { data: userData, error: userError } = await supabase
       .from('chat_history')
       .insert([
-        { 
-          message: userMessage, 
-          is_bot: false,
-          user_id: userId
-        }
+        { message: userMessage, is_bot: false }
       ])
       .select()
       .single();
@@ -117,11 +92,7 @@ export const ChatInterface = () => {
       const { error: botError } = await supabase
         .from('chat_history')
         .insert([
-          { 
-            message: data.message, 
-            is_bot: true,
-            user_id: userId
-          }
+          { message: data.message, is_bot: true }
         ]);
 
       if (botError) {

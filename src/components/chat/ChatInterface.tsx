@@ -32,6 +32,9 @@ export const ChatInterface = () => {
   }, [messages]);
 
   const loadChatHistory = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+
     const { data, error } = await supabase
       .from('chat_history')
       .select('*')
@@ -53,6 +56,16 @@ export const ChatInterface = () => {
     e.preventDefault();
     if (!newMessage.trim() || isLoading) return;
 
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please login to send messages",
+      });
+      return;
+    }
+
     setIsLoading(true);
     const userMessage = newMessage;
     setNewMessage('');
@@ -60,9 +73,11 @@ export const ChatInterface = () => {
     // Add user message to chat
     const { data: userData, error: userError } = await supabase
       .from('chat_history')
-      .insert([
-        { message: userMessage, is_bot: false }
-      ])
+      .insert([{
+        message: userMessage,
+        is_bot: false,
+        user_id: session.user.id
+      }])
       .select()
       .single();
 
@@ -91,9 +106,11 @@ export const ChatInterface = () => {
       // Add bot response to chat
       const { error: botError } = await supabase
         .from('chat_history')
-        .insert([
-          { message: data.message, is_bot: true }
-        ]);
+        .insert([{
+          message: data.message,
+          is_bot: true,
+          user_id: session.user.id
+        }]);
 
       if (botError) {
         toast({

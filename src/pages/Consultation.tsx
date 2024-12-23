@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BottomNav } from '@/components/layout/BottomNav';
 

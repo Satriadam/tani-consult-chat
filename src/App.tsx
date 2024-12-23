@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard';
 import Consultation from './pages/Consultation';
 import Weather from './pages/Weather';
 import Calendar from './pages/Calendar';
+import Notifications from './pages/Notifications';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/consultation" element={<Consultation />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/calendar" element={<Calendar />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

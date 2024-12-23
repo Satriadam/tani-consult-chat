@@ -19,7 +19,7 @@ const Weather = () => {
         <div className="bg-[#4CAF50] text-white rounded-lg p-6 mb-6">
           <h2 className="text-center text-xl font-bold mb-4">Cuaca Hari Ini</h2>
           <div className="flex flex-col items-center mb-4">
-            <img src="/lovable-uploads/b9db9967-20c7-4c6b-9f4c-f8302e098c79.png" alt="Weather" className="w-20 h-20 mb-2" />
+            <span className="text-6xl mb-2">⛅</span>
             <span className="text-4xl font-bold">28°C</span>
             <span className="text-sm">Cerah Berawan</span>
           </div>
@@ -46,11 +46,17 @@ const Weather = () => {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h3 className="font-bold mb-4">Prakiraan 5 Hari Kedepan</h3>
           <div className="grid grid-cols-5 gap-4">
-            {['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'].map((day, index) => (
-              <div key={day} className="text-center">
-                <div className="text-sm mb-1">{day}</div>
-                <img src="/lovable-uploads/b9db9967-20c7-4c6b-9f4c-f8302e098c79.png" alt="Weather" className="w-8 h-8 mx-auto mb-1" />
-                <div className="text-sm font-bold">{28 + index}°C</div>
+            {[
+              { day: 'Senin', temp: 28, emoji: '⛅' },
+              { day: 'Selasa', temp: 29, emoji: '🌤️' },
+              { day: 'Rabu', temp: 30, emoji: '⛅' },
+              { day: 'Kamis', temp: 31, emoji: '🌧️' },
+              { day: 'Jumat', temp: 32, emoji: '⛅' }
+            ].map((item) => (
+              <div key={item.day} className="text-center">
+                <div className="text-sm mb-1">{item.day}</div>
+                <div className="text-2xl mb-1">{item.emoji}</div>
+                <div className="text-sm font-bold">{item.temp}°C</div>
               </div>
             ))}
           </div>

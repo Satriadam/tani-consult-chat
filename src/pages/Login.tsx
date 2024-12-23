@@ -19,24 +19,40 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password: password.trim(),
       });
 
-      if (error) throw error;
+      if (error) {
+        if (error.message === 'Invalid login credentials') {
+          toast({
+            variant: "destructive",
+            title: "Login gagal",
+            description: "Email atau password salah. Silakan coba lagi.",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Login gagal",
+            description: error.message,
+          });
+        }
+        return;
+      }
 
-      toast({
-        title: "Login berhasil",
-        description: "Selamat datang kembali!",
-      });
-      
-      navigate('/');
+      if (data.user) {
+        toast({
+          title: "Login berhasil",
+          description: "Selamat datang kembali!",
+        });
+        navigate('/dashboard');
+      }
     } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Login gagal",
-        description: error.message,
+        description: "Terjadi kesalahan. Silakan coba lagi.",
       });
     } finally {
       setLoading(false);
@@ -64,7 +80,7 @@ const Login = () => {
                   type="email"
                   required
                   className="pl-10"
-                  placeholder="Email atau Username"
+                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

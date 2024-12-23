@@ -1,44 +1,30 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Mail } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const { data, error } = await supabase.functions.invoke('send-reset-otp', {
-        body: { email },
-      });
-
-      if (error) throw error;
-
+    // Simulasi proses reset password
+    setTimeout(() => {
       toast({
-        title: "Kode OTP terkirim",
-        description: "Silakan cek email Anda untuk kode OTP",
+        title: "Link reset password terkirim",
+        description: "Silakan cek email Anda untuk instruksi selanjutnya",
       });
-
-      // Redirect to OTP verification page
-      window.location.href = `/verify-otp?email=${encodeURIComponent(email)}`;
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Gagal mengirim OTP",
-        description: error.message,
-      });
-    } finally {
+      navigate('/login');
       setLoading(false);
-    }
+    }, 1000);
   };
 
   return (
@@ -51,7 +37,7 @@ const ForgotPassword = () => {
             alt="OK TANI Logo"
           />
           <h1 className="text-3xl font-bold text-primary">Lupa Password</h1>
-          <p className="text-gray-600">Masukkan email Anda untuk menerima kode OTP</p>
+          <p className="text-gray-600">Masukkan email Anda untuk reset password</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -71,7 +57,7 @@ const ForgotPassword = () => {
               className="w-full"
               disabled={loading}
             >
-              {loading ? 'Mengirim...' : 'Kirim OTP'}
+              {loading ? 'Mengirim...' : 'Reset Password'}
             </Button>
             <div className="text-center">
               <Link to="/login" className="text-sm text-primary hover:text-primary-hover">

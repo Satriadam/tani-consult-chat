@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
@@ -18,45 +17,15 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password: password.trim(),
-      });
-
-      if (error) {
-        if (error.message === 'Invalid login credentials') {
-          toast({
-            variant: "destructive",
-            title: "Login gagal",
-            description: "Email atau password salah. Silakan coba lagi.",
-          });
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Login gagal",
-            description: error.message,
-          });
-        }
-        return;
-      }
-
-      if (data.user) {
-        toast({
-          title: "Login berhasil",
-          description: "Selamat datang kembali!",
-        });
-        navigate('/dashboard');
-      }
-    } catch (error: any) {
+    // Simulasi proses login
+    setTimeout(() => {
       toast({
-        variant: "destructive",
-        title: "Login gagal",
-        description: "Terjadi kesalahan. Silakan coba lagi.",
+        title: "Login berhasil",
+        description: "Selamat datang kembali!",
       });
-    } finally {
+      navigate('/dashboard');
       setLoading(false);
-    }
+    }, 1000);
   };
 
   return (

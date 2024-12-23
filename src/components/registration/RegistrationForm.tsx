@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
@@ -16,27 +15,9 @@ export const RegistrationForm = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const validatePassword = (password: string) => {
-    if (password.length < 6) {
-      return "Password harus minimal 6 karakter";
-    }
-    return null;
-  };
-
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    const passwordError = validatePassword(password);
-    if (passwordError) {
-      toast({
-        variant: "destructive",
-        title: "Validasi gagal",
-        description: passwordError,
-      });
-      setLoading(false);
-      return;
-    }
 
     if (password !== confirmPassword) {
       toast({
@@ -48,45 +29,25 @@ export const RegistrationForm = () => {
       return;
     }
 
-    try {
-      // First, sign up the user
-      const { data: { user }, error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (signUpError) throw signUpError;
-
-      if (user) {
-        // Then create the profile with the user's ID
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([
-            {
-              id: user.id,
-              full_name: fullName,
-              phone_number: phoneNumber,
-            },
-          ]);
-
-        if (profileError) throw profileError;
-
-        toast({
-          title: "Registrasi berhasil",
-          description: "Silakan cek email Anda untuk verifikasi.",
-        });
-        
-        navigate('/login');
-      }
-    } catch (error: any) {
+    if (password.length < 6) {
       toast({
         variant: "destructive",
-        title: "Registrasi gagal",
-        description: error.message,
+        title: "Validasi gagal",
+        description: "Password harus minimal 6 karakter",
       });
-    } finally {
       setLoading(false);
+      return;
     }
+
+    // Simulasi proses registrasi
+    setTimeout(() => {
+      toast({
+        title: "Registrasi berhasil",
+        description: "Selamat datang di OK TANI!",
+      });
+      navigate('/dashboard');
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -150,7 +111,7 @@ export const RegistrationForm = () => {
           />
         </div>
         <p className="text-sm text-gray-500">
-          Minimal 8 karakter, kombinasi huruf dan angka
+          Minimal 6 karakter, kombinasi huruf dan angka
         </p>
       </div>
 

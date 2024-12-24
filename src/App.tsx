@@ -16,6 +16,9 @@ import Donation from './pages/Donation';
 import FAQ from './pages/FAQ';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import AccountSettings from './pages/AccountSettings';
+import ChangePassword from './pages/ChangePassword';
+import AccountIntegration from './pages/AccountIntegration';
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/account-settings" element={<AccountSettings />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/account-integration" element={<AccountIntegration />} />
       </Routes>
     </Router>
   );

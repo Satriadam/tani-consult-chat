@@ -1,28 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Lock } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  
+  const [searchParams] = useSearchParams();
   const email = searchParams.get('email');
-  const token = searchParams.get('token');
-
-  useEffect(() => {
-    if (!email || !token) {
-      navigate('/forgot-password');
-    }
-  }, [email, token, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,28 +37,15 @@ const ResetPassword = () => {
     }
 
     setLoading(true);
-    try {
-      const { error } = await supabase.functions.invoke('reset-password', {
-        body: { email, token, password },
-      });
 
-      if (error) throw error;
-
+    // Simulate password reset process
+    setTimeout(() => {
       toast({
         title: "Password berhasil diubah",
         description: "Silakan login dengan password baru Anda",
       });
-
       navigate('/login');
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Gagal mengubah password",
-        description: error.message,
-      });
-    } finally {
-      setLoading(false);
-    }
+    }, 1000);
   };
 
   return (

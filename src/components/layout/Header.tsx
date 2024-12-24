@@ -1,124 +1,51 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { useTheme } from 'next-themes';
+import { Moon, Sun } from 'lucide-react';
 
 export const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsOpen(false);
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <img 
-              src="/lovable-uploads/3eb7ccb9-aa7b-4535-bfc0-c4d98385b6ce.png" 
-              alt="OK TANI Logo" 
+            <img
+              src="/lovable-uploads/3eb7ccb9-aa7b-4535-bfc0-c4d98385b6ce.png"
+              alt="OK TANI Logo"
               className="h-8 w-auto"
             />
-            <span className="text-primary text-2xl font-bold">OK TANI</span>
+            <span className="text-xl font-bold text-primary dark:text-white">OK TANI</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection('home')}
-              className="text-gray-600 hover:text-primary"
-            >
-              Beranda
-            </button>
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-gray-600 hover:text-primary"
-            >
-              Tentang Web
-            </button>
-            <button
-              onClick={() => scrollToSection('info')}
-              className="text-gray-600 hover:text-primary"
-            >
-              Informasi/Media
-            </button>
-            <button
-              onClick={() => scrollToSection('features')}
-              className="text-gray-600 hover:text-primary"
-            >
-              Fitur
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="text-gray-600 hover:text-primary"
-            >
-              Kontak
-            </button>
-            <Link
-              to="/login"
-              className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-hover"
-            >
-              Login/Masuk
-            </Link>
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <nav className="md:hidden py-4">
-            <div className="flex flex-col space-y-4">
-              <button
-                onClick={() => scrollToSection('home')}
-                className="text-gray-600 hover:text-primary"
-              >
-                Beranda
-              </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className="text-gray-600 hover:text-primary"
-              >
-                Tentang Web
-              </button>
-              <button
-                onClick={() => scrollToSection('info')}
-                className="text-gray-600 hover:text-primary"
-              >
-                Informasi/Media
-              </button>
-              <button
-                onClick={() => scrollToSection('features')}
-                className="text-gray-600 hover:text-primary"
-              >
-                Fitur
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="text-gray-600 hover:text-primary"
-              >
-                Kontak
-              </button>
-              <Link
-                to="/login"
-                className="bg-primary text-white px-4 py-2 rounded text-center hover:bg-primary-hover"
-                onClick={() => setIsOpen(false)}
-              >
-                Login/Masuk
-              </Link>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <Sun className="h-4 w-4" />
+              <Switch
+                checked={theme === 'dark'}
+                onCheckedChange={toggleTheme}
+              />
+              <Moon className="h-4 w-4" />
             </div>
-          </nav>
-        )}
+
+            <Link to="/login">
+              <Button variant="outline" className="dark:border-gray-700 dark:text-white">
+                Masuk
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button className="bg-primary hover:bg-primary-hover text-white">
+                Daftar
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </header>
   );

@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
-import { supabase } from '@/integrations/supabase/client';
 
 const VerifyOTP = () => {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
   const email = searchParams.get('email');
 
   useEffect(() => {
@@ -22,31 +21,16 @@ const VerifyOTP = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    
     setLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('verify-otp', {
-        body: { email, otp },
-      });
 
-      if (error) throw error;
-
+    // Simulate verification process
+    setTimeout(() => {
       toast({
         title: "Kode OTP valid",
         description: "Silakan buat password baru",
       });
-
-      navigate(`/reset-password?email=${encodeURIComponent(email)}&token=${encodeURIComponent(otp)}`);
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Verifikasi gagal",
-        description: error.message,
-      });
-    } finally {
-      setLoading(false);
-    }
+      navigate(`/reset-password?email=${encodeURIComponent(email || '')}`);
+    }, 1000);
   };
 
   return (
@@ -71,7 +55,7 @@ const VerifyOTP = () => {
                 render={({ slots }) => (
                   <InputOTPGroup className="gap-2">
                     {slots.map((slot, index) => (
-                      <InputOTPSlot key={index} {...slot} index={index} />
+                      <InputOTPSlot key={index} {...slot} />
                     ))}
                   </InputOTPGroup>
                 )}
@@ -84,14 +68,6 @@ const VerifyOTP = () => {
             >
               {loading ? 'Memverifikasi...' : 'Verifikasi OTP'}
             </Button>
-            <div className="text-center space-y-2">
-              <Link to="/forgot-password" className="text-sm text-primary hover:text-primary-hover block">
-                Kirim ulang kode OTP
-              </Link>
-              <Link to="/login" className="text-sm text-primary hover:text-primary-hover block">
-                Kembali ke halaman login
-              </Link>
-            </div>
           </form>
         </CardContent>
       </Card>

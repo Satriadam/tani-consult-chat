@@ -11,6 +11,11 @@ import Weather from './pages/Weather';
 import Calendar from './pages/Calendar';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
+import About from './pages/About';
+import Donation from './pages/Donation';
+import FAQ from './pages/FAQ';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 
 function App() {
   return (
@@ -28,6 +33,11 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/donation" element={<Donation />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
       </Routes>
     </Router>
   );

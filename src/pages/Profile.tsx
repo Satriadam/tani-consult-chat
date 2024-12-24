@@ -41,27 +41,27 @@ const Profile = () => {
         <div className="mb-6">
           <h2 className="text-gray-600 font-semibold mb-2">Informasi Lainnya</h2>
           <div className="bg-white rounded-lg">
-            <Link to="#" className="flex items-center p-4 border-b">
+            <Link to="/notifications" className="flex items-center p-4 border-b">
               <span className="text-xl mr-3">🔔</span>
               <span>Notifikasi</span>
             </Link>
-            <Link to="#" className="flex items-center p-4 border-b">
+            <Link to="/about" className="flex items-center p-4 border-b">
               <span className="text-xl mr-3">🏢</span>
               <span>Tentang Perusahaan</span>
             </Link>
-            <Link to="#" className="flex items-center p-4 border-b">
+            <Link to="/donation" className="flex items-center p-4 border-b">
               <span className="text-xl mr-3">🎁</span>
               <span>Donasi</span>
             </Link>
-            <Link to="#" className="flex items-center p-4 border-b">
+            <Link to="/faq" className="flex items-center p-4 border-b">
               <span className="text-xl mr-3">❓</span>
               <span>Bantuan & FAQ</span>
             </Link>
-            <Link to="#" className="flex items-center p-4 border-b">
+            <Link to="/terms" className="flex items-center p-4 border-b">
               <span className="text-xl mr-3">📜</span>
               <span>Ketentuan Layanan</span>
             </Link>
-            <Link to="#" className="flex items-center p-4">
+            <Link to="/privacy" className="flex items-center p-4">
               <span className="text-xl mr-3">🔒</span>
               <span>Kebijakan Privasi</span>
             </Link>

@@ -1,8 +1,25 @@
 import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BottomNav } from '@/components/layout/BottomNav';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation */}
@@ -23,10 +40,28 @@ const Profile = () => {
               <span className="text-xl mr-3">👤</span>
               <span>Kelola Akun</span>
             </Link>
-            <Link to="#" className="flex items-center p-4 text-red-500">
-              <span className="text-xl mr-3">🚪</span>
-              <span>Keluar</span>
-            </Link>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <button className="flex items-center p-4 text-red-500 w-full">
+                  <span className="text-xl mr-3">🚪</span>
+                  <span>Keluar</span>
+                </button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Konfirmasi Keluar</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Apakah Anda yakin ingin keluar dari aplikasi?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Batal</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleLogout}>
+                    Keluar
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
 

@@ -17,13 +17,15 @@ const Dashboard = () => {
         </div>
         <div className="flex items-center space-x-4">
           <span className="hidden sm:inline">Selamat Malam</span>
-          <Link to="/notifications" className="p-2 hover:bg-[#45a049] rounded-full transition-colors">
-            <Bell size={24} />
-          </Link>
-          <Link to="/faq" className="p-2 hover:bg-[#45a049] rounded-full transition-colors">
-            <HelpCircle size={24} />
-          </Link>
-          <div className="w-8 h-8 bg-white rounded-full" />
+          <div className="flex items-center space-x-2">
+            <Link to="/notifications" className="p-2 hover:bg-[#45a049] rounded-full transition-colors">
+              <Bell size={24} />
+            </Link>
+            <Link to="/faq" className="p-2 hover:bg-[#45a049] rounded-full transition-colors">
+              <HelpCircle size={24} />
+            </Link>
+            <div className="w-8 h-8 bg-white rounded-full" />
+          </div>
         </div>
       </div>
 
@@ -31,22 +33,22 @@ const Dashboard = () => {
       <div className="container mx-auto px-4 py-8 mb-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Link to="/consultation" className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-            <div className="w-16 h-16 mb-4">
-              <MessageSquare className="w-full h-full text-gray-600" />
+            <div className="w-16 h-16 mb-4 text-4xl flex items-center justify-center">
+              💬
             </div>
             <span className="text-lg font-semibold">Konsultasi Tani</span>
           </Link>
 
           <Link to="/weather" className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-            <div className="w-16 h-16 mb-4">
-              <CloudSun className="w-full h-full text-gray-600" />
+            <div className="w-16 h-16 mb-4 text-4xl flex items-center justify-center">
+              🌤️
             </div>
             <span className="text-lg font-semibold">Info Cuaca</span>
           </Link>
 
           <Link to="/calendar" className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-            <div className="w-16 h-16 mb-4">
-              <Calendar className="w-full h-full text-gray-600" />
+            <div className="w-16 h-16 mb-4 text-4xl flex items-center justify-center">
+              📅
             </div>
             <span className="text-lg font-semibold">Kalender Tanam</span>
           </Link>

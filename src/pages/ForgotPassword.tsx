@@ -16,13 +16,13 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulasi proses reset password
+    // Simulate process
     setTimeout(() => {
       toast({
-        title: "Link reset password terkirim",
-        description: "Silakan cek email Anda untuk instruksi selanjutnya",
+        title: "Email terkirim",
+        description: "Silakan cek email Anda untuk kode OTP",
       });
-      navigate('/login');
+      navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
       setLoading(false);
     }, 1000);
   };

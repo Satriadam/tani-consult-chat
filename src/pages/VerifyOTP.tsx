@@ -25,16 +25,25 @@ const VerifyOTP = () => {
 
     // Simulate verification process
     setTimeout(() => {
-      toast({
-        title: "Kode OTP valid",
-        description: "Silakan buat password baru",
-      });
-      navigate(`/reset-password?email=${encodeURIComponent(email || '')}`);
+      if (otp.length === 6) {
+        toast({
+          title: "Kode OTP valid",
+          description: "Silakan buat password baru",
+        });
+        navigate(`/reset-password?email=${encodeURIComponent(email || '')}`);
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Kode OTP tidak valid",
+          description: "Pastikan kode OTP yang Anda masukkan benar",
+        });
+      }
+      setLoading(false);
     }, 1000);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center space-y-2">
           <img
@@ -42,8 +51,8 @@ const VerifyOTP = () => {
             src="/lovable-uploads/3eb7ccb9-aa7b-4535-bfc0-c4d98385b6ce.png"
             alt="OK TANI Logo"
           />
-          <h1 className="text-3xl font-bold text-primary dark:text-white">Verifikasi OTP</h1>
-          <p className="text-gray-600 dark:text-gray-400">Masukkan kode OTP yang telah dikirim ke email Anda</p>
+          <h1 className="text-3xl font-bold text-primary">Verifikasi OTP</h1>
+          <p className="text-gray-600">Masukkan kode OTP yang telah dikirim ke email Anda</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -55,7 +64,7 @@ const VerifyOTP = () => {
                 render={({ slots }) => (
                   <InputOTPGroup className="gap-2">
                     {slots.map((slot, index) => (
-                      <InputOTPSlot key={index} {...slot} index={index} />
+                      <InputOTPSlot key={index} {...slot} />
                     ))}
                   </InputOTPGroup>
                 )}
@@ -63,7 +72,7 @@ const VerifyOTP = () => {
             </div>
             <Button
               type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-white"
+              className="w-full"
               disabled={loading || otp.length !== 6}
             >
               {loading ? 'Memverifikasi...' : 'Verifikasi OTP'}

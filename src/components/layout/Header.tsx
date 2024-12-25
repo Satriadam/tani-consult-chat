@@ -1,18 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
 
 export const Header = () => {
-  const { theme, setTheme } = useTheme();
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
@@ -21,21 +12,30 @@ export const Header = () => {
               alt="OK TANI Logo"
               className="h-8 w-auto"
             />
-            <span className="text-xl font-bold text-primary dark:text-white">OK TANI</span>
+            <span className="text-xl font-bold text-primary">OK TANI</span>
           </Link>
 
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Sun className="h-4 w-4" />
-              <Switch
-                checked={theme === 'dark'}
-                onCheckedChange={toggleTheme}
-              />
-              <Moon className="h-4 w-4" />
-            </div>
+          <div className="hidden md:flex items-center space-x-6">
+            <Link to="/" className="text-gray-600 hover:text-primary">
+              Beranda
+            </Link>
+            <Link to="/about" className="text-gray-600 hover:text-primary">
+              Tentang Web
+            </Link>
+            <Link to="/consultation" className="text-gray-600 hover:text-primary">
+              Konsultasi
+            </Link>
+            <Link to="/weather" className="text-gray-600 hover:text-primary">
+              Cuaca
+            </Link>
+            <Link to="/faq" className="text-gray-600 hover:text-primary">
+              FAQ
+            </Link>
+          </div>
 
+          <div className="flex items-center space-x-4">
             <Link to="/login">
-              <Button variant="outline" className="dark:border-gray-700 dark:text-white">
+              <Button variant="outline">
                 Masuk
               </Button>
             </Link>

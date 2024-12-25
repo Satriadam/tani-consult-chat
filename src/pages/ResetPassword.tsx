@@ -3,38 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
 import { Lock } from 'lucide-react';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (password !== confirmPassword) {
-      toast({
-        variant: "destructive",
-        title: "Password tidak cocok",
-        description: "Password dan konfirmasi password harus sama",
-      });
-      return;
-    }
-
-    setLoading(true);
-
-    // Simulate password reset process
-    setTimeout(() => {
-      toast({
-        title: "Password berhasil diubah",
-        description: "Silakan login dengan password baru Anda",
-      });
+    if (password === confirmPassword) {
       navigate('/login');
-    }, 1000);
+    }
   };
 
   return (
@@ -61,7 +42,6 @@ const ResetPassword = () => {
                   placeholder="Password baru"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  minLength={6}
                 />
               </div>
               <div className="relative">
@@ -73,16 +53,14 @@ const ResetPassword = () => {
                   placeholder="Konfirmasi password baru"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  minLength={6}
                 />
               </div>
             </div>
             <Button
               type="submit"
-              className="w-full bg-primary hover:bg-primary-hover"
-              disabled={loading}
+              className="w-full bg-[#4CAF50] hover:bg-[#45a049] text-white"
             >
-              {loading ? 'Memproses...' : 'Simpan Password Baru'}
+              Simpan Password Baru
             </Button>
           </form>
         </CardContent>

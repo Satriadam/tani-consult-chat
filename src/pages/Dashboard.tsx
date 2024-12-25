@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MessageSquare, CloudSun, Calendar } from 'lucide-react';
+import { MessageSquare, CloudSun, Calendar, Bell, HelpCircle } from 'lucide-react';
 import { BottomNav } from '@/components/layout/BottomNav';
 
 const Dashboard = () => {
@@ -16,7 +16,13 @@ const Dashboard = () => {
           <span className="text-xl font-bold">OK TANI</span>
         </div>
         <div className="flex items-center space-x-4">
-          <span>Selamat Malam</span>
+          <span className="hidden sm:inline">Selamat Malam</span>
+          <Link to="/notifications" className="p-2 hover:bg-[#45a049] rounded-full transition-colors">
+            <Bell size={24} />
+          </Link>
+          <Link to="/faq" className="p-2 hover:bg-[#45a049] rounded-full transition-colors">
+            <HelpCircle size={24} />
+          </Link>
           <div className="w-8 h-8 bg-white rounded-full" />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,8 +12,6 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [searchParams] = useSearchParams();
-  const email = searchParams.get('email');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,15 +21,6 @@ const ResetPassword = () => {
         variant: "destructive",
         title: "Password tidak cocok",
         description: "Password dan konfirmasi password harus sama",
-      });
-      return;
-    }
-
-    if (password.length < 6) {
-      toast({
-        variant: "destructive",
-        title: "Password terlalu pendek",
-        description: "Password harus minimal 6 karakter",
       });
       return;
     }
@@ -90,7 +79,7 @@ const ResetPassword = () => {
             </div>
             <Button
               type="submit"
-              className="w-full"
+              className="w-full bg-primary hover:bg-primary-hover"
               disabled={loading}
             >
               {loading ? 'Memproses...' : 'Simpan Password Baru'}

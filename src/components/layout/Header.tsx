@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 export const Header = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4">
@@ -15,36 +22,44 @@ export const Header = () => {
             <span className="text-xl font-bold text-primary">OK TANI</span>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="text-gray-600 hover:text-primary">
-              Beranda
-            </Link>
-            <Link to="/about" className="text-gray-600 hover:text-primary">
-              Tentang Web
-            </Link>
-            <Link to="/consultation" className="text-gray-600 hover:text-primary">
-              Konsultasi
-            </Link>
-            <Link to="/weather" className="text-gray-600 hover:text-primary">
-              Cuaca
-            </Link>
-            <Link to="/faq" className="text-gray-600 hover:text-primary">
-              FAQ
-            </Link>
+          <div className="hidden md:flex items-center space-x-8">
+            <button
+              onClick={() => scrollToSection('home')}
+              className="text-gray-600 hover:text-primary"
+            >
+              BERANDA
+            </button>
+            <button
+              onClick={() => scrollToSection('about')}
+              className="text-gray-600 hover:text-primary"
+            >
+              TENTANG WEB
+            </button>
+            <button
+              onClick={() => scrollToSection('info')}
+              className="text-gray-600 hover:text-primary"
+            >
+              INFORMASI / MEDIA
+            </button>
+            <button
+              onClick={() => scrollToSection('features')}
+              className="text-gray-600 hover:text-primary"
+            >
+              FITUR
+            </button>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="text-gray-600 hover:text-primary"
+            >
+              KONTAK
+            </button>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <Link to="/login">
-              <Button variant="outline">
-                Masuk
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button className="bg-primary hover:bg-primary-hover text-white">
-                Daftar
-              </Button>
-            </Link>
-          </div>
+          <Link to="/register">
+            <Button className="bg-[#4CAF50] hover:bg-[#45a049] text-white">
+              Daftar/Masuk
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

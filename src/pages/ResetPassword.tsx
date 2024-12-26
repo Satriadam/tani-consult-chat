@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,14 +8,9 @@ import { Lock } from 'lucide-react';
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (password === confirmPassword) {
-      navigate('/login');
-    }
   };
 
   return (
@@ -56,12 +51,14 @@ const ResetPassword = () => {
                 />
               </div>
             </div>
-            <Button
-              type="submit"
-              className="w-full bg-[#4CAF50] hover:bg-[#45a049] text-white"
-            >
-              Simpan Password Baru
-            </Button>
+            <Link to="/login">
+              <Button
+                type="submit"
+                className="w-full bg-[#4CAF50] hover:bg-[#45a049] text-white"
+              >
+                Simpan Password Baru
+              </Button>
+            </Link>
           </form>
         </CardContent>
       </Card>

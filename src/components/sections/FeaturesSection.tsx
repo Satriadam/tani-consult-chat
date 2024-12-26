@@ -1,5 +1,3 @@
-import { MessageSquare, Sun, Calendar } from 'lucide-react';
-
 export const FeaturesSection = () => {
   return (
     <section className="py-20 bg-white" id="features">
@@ -7,8 +5,8 @@ export const FeaturesSection = () => {
         <h2 className="text-3xl font-bold text-center mb-12">Fitur Unggulan</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-6 bg-white rounded-lg shadow-lg">
-            <div className="w-16 h-16 mx-auto mb-4">
-              <MessageSquare className="w-full h-full text-primary" />
+            <div className="w-16 h-16 mx-auto mb-4 text-4xl flex items-center justify-center">
+              💬
             </div>
             <h3 className="text-xl font-semibold mb-4 text-center">Konsultasi Tani</h3>
             <ul className="text-gray-600 space-y-2">
@@ -20,8 +18,8 @@ export const FeaturesSection = () => {
             </ul>
           </div>
           <div className="p-6 bg-white rounded-lg shadow-lg">
-            <div className="w-16 h-16 mx-auto mb-4">
-              <Sun className="w-full h-full text-primary" />
+            <div className="w-16 h-16 mx-auto mb-4 text-4xl flex items-center justify-center">
+              🌤️
             </div>
             <h3 className="text-xl font-semibold mb-4 text-center">Info Cuaca</h3>
             <ul className="text-gray-600 space-y-2">
@@ -33,8 +31,8 @@ export const FeaturesSection = () => {
             </ul>
           </div>
           <div className="p-6 bg-white rounded-lg shadow-lg">
-            <div className="w-16 h-16 mx-auto mb-4">
-              <Calendar className="w-full h-full text-primary" />
+            <div className="w-16 h-16 mx-auto mb-4 text-4xl flex items-center justify-center">
+              📅
             </div>
             <h3 className="text-xl font-semibold mb-4 text-center">Kalender Tanaman</h3>
             <ul className="text-gray-600 space-y-2">

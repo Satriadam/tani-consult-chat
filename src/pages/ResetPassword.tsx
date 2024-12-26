@@ -51,14 +51,16 @@ const ResetPassword = () => {
                 />
               </div>
             </div>
-            <Link to="/login">
-              <Button
-                type="submit"
-                className="w-full bg-[#4CAF50] hover:bg-[#45a049] text-white"
-              >
-                Simpan Password Baru
-              </Button>
-            </Link>
+            <div className="mt-8"> {/* Added extra margin top here */}
+              <Link to="/login">
+                <Button
+                  type="submit"
+                  className="w-full bg-[#4CAF50] hover:bg-[#45a049] text-white"
+                >
+                  Simpan Password Baru
+                </Button>
+              </Link>
+            </div>
           </form>
         </CardContent>
       </Card>
